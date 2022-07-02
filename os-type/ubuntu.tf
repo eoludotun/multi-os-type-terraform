@@ -9,6 +9,8 @@ provider "azurerm" {
 
 #}
 
+
+
 module "virtual-machine" {
   source = "../"
 
@@ -43,6 +45,7 @@ module "virtual-machine" {
   enable_vm_availability_set = true
   enable_public_ip_address   = true
 
+
   # Network Seurity group port allow definitions for each Virtual Machine
   # NSG association to be added automatically for all network interfaces.
   # Remove this NSG rules block, if `existing_network_security_group_id` is specified
@@ -58,6 +61,8 @@ module "virtual-machine" {
       source_address_prefix  = "*"
     },
   ]
+
+
 
   # Boot diagnostics to troubleshoot virtual machines, by default uses managed 
   # To use custom storage account, specify `storage_account_name` with a valid name
