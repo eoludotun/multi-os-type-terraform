@@ -1,3 +1,5 @@
+#terraform output -raw admin_ssh_key_public
+
 variable "resource_group_name" {
   description = "A container that holds related resources for an Azure solution"
   default     = "NetworkWatcherRG"
@@ -194,12 +196,14 @@ variable "vm_time_zone" {
 
 variable "generate_admin_ssh_key" {
   description = "Generates a secure private key and encodes it as PEM."
-  default     = false
+  default     = true
 }
 
 variable "admin_ssh_key_data" {
   description = "specify the path to the existing SSH key to authenticate Linux virtual machine"
-  default     = null
+  default = null
+  #default     = "~/.ssh/id_ed25519.pub"
+  #default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6yyYgep1jBfhinrBgGrVczpdfGivvF13NMF3CVGiSd ebenezer.software.tester@gmail.com"
 }
 
 variable "custom_image" {

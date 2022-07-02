@@ -21,6 +21,7 @@ resource "tls_private_key" "rsa" {
   rsa_bits  = 4096
 }
 
+
 #----------------------------------------------------------
 # Resource Group, VNet, Subnet selection & Random Resources
 #----------------------------------------------------------
@@ -198,6 +199,12 @@ resource "azurerm_network_interface_security_group_association" "nsgassoc" {
   network_security_group_id = var.existing_network_security_group_id == null ? azurerm_network_security_group.nsg.0.id : var.existing_network_security_group_id
 }
 
+/* # Create (and display) an SSH key
+resource "tls_private_key" "ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+} */
+
 #---------------------------------------
 # Linux Virutal machine
 #---------------------------------------
@@ -222,7 +229,20 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
   zone                            = var.vm_availability_zone
   tags                            = merge({ "ResourceName" = var.instances_count == 1 ? var.virtual_machine_name : format("%s%s", lower(replace(var.virtual_machine_name, "/[[:^alnum:]]/", "")), count.index + 1) }, var.tags, )
 
-  dynamic "admin_ssh_key" {
+  /* admin_ssh_key {
+    username   = var.admin_username
+    public_key = file("~/.ssh/id_rsa.pub")
+  } */
+
+  /* computer_name                   = var.admin_username
+
+  admin_ssh_key {
+    username   = var.admin_username
+    public_key = tls_private_key.ssh.public_key_openssh
+  } */
+
+
+   dynamic "admin_ssh_key" { 
     for_each = var.disable_password_authentication ? [1] : []
     content {
       username   = var.admin_username
