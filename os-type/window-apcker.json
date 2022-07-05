@@ -1,0 +1,23 @@
+{
+
+  "builders": [{
+    "type": "azure-arm",
+    "subscription_id": "a40e6f09-a0f0-4884-88e6-528919fd9221",
+
+    "managed_image_resource_group_name": "NetworkWatcherRG",
+    "managed_image_name": "myPackerImage",
+
+
+    "os_type": "Windows",
+    "image_publisher": "MicrosoftWindowsServer",
+    "image_offer": "WindowsServer",
+    "image_sku": "2016-Datacenter",
+    "communicator": "winrm",
+    "winrm_use_ssl": "true",
+    "winrm_insecure": "true",
+    "winrm_timeout": "3m",
+    "winrm_username": "packer",
+    "location": "West US 3",
+    "vm_size": "Standard_DS2"
+  }]
+}

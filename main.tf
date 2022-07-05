@@ -111,7 +111,7 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = data.azurerm_subnet.snet.id
     private_ip_address_allocation = var.private_ip_address_allocation_type
     private_ip_address            = var.private_ip_address_allocation_type == "Static" ? element(concat(var.private_ip_address, [""]), count.index) : null
-    public_ip_address_id          =  null  #var.enable_public_ip_address == true ? element(concat(azurerm_public_ip.pip.*.id, [""]), count.index) : null
+    public_ip_address_id          = var.enable_public_ip_address == true ? element(concat(azurerm_public_ip.pip.*.id, [""]), count.index) : null
   }
 
   lifecycle {
@@ -242,7 +242,7 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
   } */
 
 
-   dynamic "admin_ssh_key" { 
+  dynamic "admin_ssh_key" {
     for_each = var.disable_password_authentication ? [1] : []
     content {
       username   = var.admin_username
