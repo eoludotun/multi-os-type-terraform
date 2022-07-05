@@ -6,7 +6,7 @@ output "admin_ssh_key_public" {
 output "admin_ssh_key_private" {
   description = "The generated private key data in PEM format"
   #sensitive   = true
-  value       = var.disable_password_authentication == true && var.generate_admin_ssh_key == true && var.os_flavor == "linux" ? tls_private_key.rsa[0].private_key_pem : null
+  value = var.disable_password_authentication == true && var.generate_admin_ssh_key == true && var.os_flavor == "linux" ? tls_private_key.rsa[0].private_key_pem : null
 }
 
 output "windows_vm_password" {

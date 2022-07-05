@@ -1,3 +1,4 @@
+#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
 #terraform output -raw admin_ssh_key_public
 
 variable "resource_group_name" {
@@ -201,7 +202,7 @@ variable "generate_admin_ssh_key" {
 
 variable "admin_ssh_key_data" {
   description = "specify the path to the existing SSH key to authenticate Linux virtual machine"
-  default = null
+  default     = null
   #default     = "~/.ssh/id_ed25519.pub"
   #default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6yyYgep1jBfhinrBgGrVczpdfGivvF13NMF3CVGiSd ebenezer.software.tester@gmail.com"
 }
